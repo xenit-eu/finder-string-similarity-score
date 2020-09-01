@@ -1,6 +1,6 @@
 {
-  "name": "@xenit/<project-name>",
-  "version": "0.2.0",
+  "name": "@xenit/finder-string-similarity-score",
+  "version": "0.0.0",
   "license": "LGPL-3.0-or-later",
   "author": {
     "name": "Xenit",
@@ -8,7 +8,7 @@
   },
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "module": "dist/<project-name>.esm.js",
+  "module": "dist/finder-string-similarity-score.esm.js",
   "files": [
     "dist",
     "src"
