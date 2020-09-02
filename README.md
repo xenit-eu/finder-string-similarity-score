@@ -1,18 +1,45 @@
-# Typescript project boilerplate
+# String similarity score
 
-Quick setup for a new typescript library
+Calculates a similarity score between two strings (primarily for the purpose of autocomplete)
 
-1. Open up `package.json` and replace `<project-name>` with your project name.
-2. Start putting your code in `src/index.ts`
-3. On github, configure the `npm_token` secret with an npm publish token.
+## Functions
 
-## Continuous integration
+### `scoreStringSimilarity`
 
-Tests and releases are performed with Github Actions.
+Calculates a similarity score between two strings.
 
-To create a new release, simply tag a commit with a version and push.
-Tags must start with `v`, followed by a version number.
+The first parameter is typically a user input string, the second parameter is the reference string.
 
-* Release versions are published to npm with the `latest` dist-tag.
-* Pre-release versions are published to npm with the `next` dist-tag.
+```typescript
+import scoreStringSimilarity from "@xenit/finder-string-similarity-score";
 
+const match = scoreStringSimilarity("str ma", "A long string with some text to match.");
+
+// A score between 0 and 1 which describes how well the first parameters matches the second parameter.
+// A complete match always has a score of 1. A complete mismatch has a score of 0.
+console.log("Score: ", match.score);
+
+// The second parameter, chopped up into pieces.
+// This can be used to highlight the parts that matched in the string
+console.log("Chunks: ", match.chunks.map(chunk => chunk.matched?("*"+chunk.text+"*"):chunk.text).join(""));
+```
+
+## Local Development
+
+Below is a list of commands you will probably find useful.
+
+### `npm start` or `yarn start`
+
+Runs the project in development/watch mode. Your project will be rebuilt upon changes. TSDX has a special logger for your convenience. Error messages are pretty printed and formatted for compatibility with VS Code's Problems tab.
+
+Your library will be rebuilt if you make edits.
+
+### `npm run build` or `yarn build`
+
+Bundles the package to the `dist` folder.
+The package is optimized and bundled with Rollup into multiple formats (CommonJS, UMD, and ES Module).
+
+### `npm test` or `yarn test`
+
+Runs the test watcher (Jest) in an interactive mode.
+By default, runs tests related to files changed since the last commit.
