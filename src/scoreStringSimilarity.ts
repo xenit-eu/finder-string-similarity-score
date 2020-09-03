@@ -11,11 +11,11 @@ function scanForNextPosition(
     inputPosition: number,
     referencePosition: number,
     opts: SimilarityOpts
-) {
-    let bestPosition = {
-        inputPosition: inputData.length,
-        referencePosition: referenceData.length,
-    };
+): [number, number] {
+    let bestPosition: [number, number] = [
+        inputData.length,
+        referenceData.length,
+    ];
     for (
         let newReferencePosition = referencePosition;
         newReferencePosition < referenceData.length;
@@ -28,20 +28,15 @@ function scanForNextPosition(
         ) {
             if (
                 newReferencePosition + newInputPosition <
-                bestPosition.inputPosition + bestPosition.referencePosition
+                bestPosition[0] + bestPosition[1]
             ) {
                 const { match } = calculateScore(
-                    {
-                        inputCharacter: inputData[newInputPosition],
-                        referenceCharacter: referenceData[newReferencePosition],
-                    },
+                    inputData[newInputPosition],
+                    referenceData[newReferencePosition],
                     opts
                 );
                 if (match) {
-                    bestPosition = {
-                        inputPosition: newInputPosition,
-                        referencePosition: newReferencePosition,
-                    };
+                    bestPosition = [newInputPosition, newReferencePosition];
                 }
             }
         }
@@ -80,7 +75,7 @@ export default function scoreStringSimilarity(
     let score = 0;
     const chunks: MatchChunk[] = [];
 
-    let { inputPosition, referencePosition } = scanForNextPosition(
+    let [inputPosition, referencePosition] = scanForNextPosition(
         inputData,
         referenceData,
         0,
@@ -103,10 +98,8 @@ export default function scoreStringSimilarity(
         referencePosition < referenceData.length
     ) {
         const { score: currentScore, match } = calculateScore(
-            {
-                inputCharacter: inputData[inputPosition],
-                referenceCharacter: referenceData[referencePosition],
-            },
+            inputData[inputPosition],
+            referenceData[referencePosition],
             opts
         );
 
@@ -120,7 +113,10 @@ export default function scoreStringSimilarity(
             inputPosition++;
             referencePosition++;
         } else {
-            const nextPosition = scanForNextPosition(
+            const [
+                nextInputPosition,
+                nextReferencePosition,
+            ] = scanForNextPosition(
                 inputData,
                 referenceData,
                 inputPosition,
@@ -131,18 +127,17 @@ export default function scoreStringSimilarity(
             chunks.push({
                 text: referenceData.slice(
                     referencePosition,
-                    nextPosition.referencePosition
+                    nextReferencePosition
                 ),
                 matched: false,
             });
 
-            totalSkippedInputCharacters +=
-                nextPosition.inputPosition - inputPosition;
+            totalSkippedInputCharacters += nextInputPosition - inputPosition;
             totalSkippedReferenceCharacters +=
-                nextPosition.referencePosition - referencePosition;
+                nextReferencePosition - referencePosition;
 
-            inputPosition = nextPosition.inputPosition;
-            referencePosition = nextPosition.referencePosition;
+            inputPosition = nextInputPosition;
+            referencePosition = nextReferencePosition;
         }
     }
 

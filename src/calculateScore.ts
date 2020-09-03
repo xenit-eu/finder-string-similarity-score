@@ -1,12 +1,13 @@
-import { ScoreContext, ScoreResult, SimilarityOpts } from './types';
+import { ScoreResult, SimilarityOpts } from './types';
 import { normalizeSync as removeAccents } from 'normalize-diacritics';
 
 export default function calculateScore(
-    scoreContext: ScoreContext,
+    inputCharacter: string,
+    referenceCharacter: string,
     opts: SimilarityOpts = {}
 ): ScoreResult {
     // Exact match, including accents and case
-    if (scoreContext.inputCharacter === scoreContext.referenceCharacter) {
+    if (inputCharacter === referenceCharacter) {
         return {
             score: 1,
             match: true,
@@ -14,11 +15,11 @@ export default function calculateScore(
     }
 
     const inputChar = opts.keepAccents
-        ? scoreContext.inputCharacter
-        : removeAccents(scoreContext.inputCharacter);
+        ? inputCharacter
+        : removeAccents(inputCharacter);
     const referenceChar = opts.keepAccents
-        ? scoreContext.referenceCharacter
-        : removeAccents(scoreContext.referenceCharacter);
+        ? referenceCharacter
+        : removeAccents(referenceCharacter);
     // Exact match, including case
     if (inputChar === referenceChar) {
         return {
