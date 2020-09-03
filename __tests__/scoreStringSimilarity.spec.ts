@@ -66,10 +66,23 @@ describe("scoreStringSimilarity", () => {
     })
 
     it("Penalizes a string that has tailing non-matching characters", () => {
-        const moreChars = scoreStringSimilarity("cde", "abcdefgh");
-        const lessChars = scoreStringSimilarity("cdea", "abcdefgh");
+        const matchingChars = scoreStringSimilarity("cde", "abcdefgh");
+        const nonMatchingChars = scoreStringSimilarity("cdea", "abcdefgh");
 
-        expect(moreChars.score).toBeGreaterThan(lessChars.score);
+        expect(matchingChars.score).toBeGreaterThan(nonMatchingChars.score);
+    })
+    it("Penalizes a string that has starting non-matching characters", () => {
+        const matchingChars = scoreStringSimilarity("cde", "abcdefgh");
+        const nonMatchingChars = scoreStringSimilarity("xcde", "abcdefgh");
+
+        expect(matchingChars.score).toBeGreaterThan(nonMatchingChars.score);
+    })
+
+    it("Gives a similar score penalty for non-matching characters in the start as in the end", () => {
+        const startMismatch = scoreStringSimilarity("xcde", "abcdefgh");
+        const endMismatch = scoreStringSimilarity("cdex", "abcdefgh");
+
+        expect(startMismatch.score).toBeCloseTo(endMismatch.score);
     })
 
 })
