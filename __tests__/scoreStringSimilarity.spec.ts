@@ -65,4 +65,11 @@ describe("scoreStringSimilarity", () => {
         expect(contiguousMatch.score).toBeGreaterThan(nonContiguousMatch.score);
     })
 
+    it("Penalizes a string that has tailing non-matching characters", () => {
+        const moreChars = scoreStringSimilarity("cde", "abcdefgh");
+        const lessChars = scoreStringSimilarity("cdea", "abcdefgh");
+
+        expect(moreChars.score).toBeGreaterThan(lessChars.score);
+    })
+
 })

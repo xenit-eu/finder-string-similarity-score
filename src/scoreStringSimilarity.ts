@@ -49,6 +49,12 @@ export default function scoreStringSimilarity(
         referencePosition++;
     }
 
+    // Decrease score for non-matching characters
+    score -= Math.min(
+        score,
+        (inputData.length - inputPosition) / inputData.length
+    );
+
     // When we ran out of characters in the input string, we still need to add the last part of the reference to the matches
     if (referencePosition < referenceData.length) {
         chunks.push({
