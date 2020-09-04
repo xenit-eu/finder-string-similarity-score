@@ -23,14 +23,14 @@ export default function calculateScore(
     // Exact match, including case
     if (inputChar === referenceChar) {
         return {
-            score: 0.8,
+            score: 0.98,
             match: true,
         };
     }
     // Match, not including case
     if (inputChar.toLowerCase() === referenceChar.toLowerCase()) {
         return {
-            score: 0.6,
+            score: 0.95,
             match: true,
         };
     }

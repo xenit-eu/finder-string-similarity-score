@@ -26,6 +26,14 @@ describe("scoreStringSimilarity", () => {
         ]);
     });
 
+    it("Gives an higher score for small prefix matches than for large non-prefix matches", () => {
+        const prefixMatch = scoreStringSimilarity("abc", "abcdefghi");
+        const otherMatch = scoreStringSimilarity("bcd", "abcdefghi");
+
+
+        expect(prefixMatch.score).toBeGreaterThan(otherMatch.score);
+    })
+
     it("Gives a score of 0 for a non-match", () => {
         const match = scoreStringSimilarity("xy", "abcdefghi");
         expect(match.score).toBeCloseTo(0);

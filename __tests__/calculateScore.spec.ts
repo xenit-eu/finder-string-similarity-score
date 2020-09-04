@@ -11,16 +11,16 @@ describe("calculateScore", () => {
 
     it("Gives less points for a match without accents", () => {
 
-        expect(calculateScore("e", "é").score).toBeCloseTo(0.8);
+        expect(calculateScore("e", "é").score).toBeCloseTo(0.98);
 
-        expect(calculateScore("E", "É").score).toBeCloseTo(0.8);
+        expect(calculateScore("E", "É").score).toBeCloseTo(0.98);
     })
 
     it("Gives less points for a match with uppercase/lowercase inconsistency", () => {
 
-        expect(calculateScore("e", "E").score).toBeCloseTo(0.6);
+        expect(calculateScore("e", "E").score).toBeCloseTo(0.95);
 
-        expect(calculateScore("é", "É").score).toBeCloseTo(0.6);
+        expect(calculateScore("é", "É").score).toBeCloseTo(0.95);
     });
 
     it("Gives no points for no match", () => {

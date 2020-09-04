@@ -103,7 +103,10 @@ export default function scoreStringSimilarity(
             opts
         );
 
-        score += currentScore;
+        // Decrease score when start of string does not match
+        score +=
+            (currentScore / referenceData.length) *
+            Math.pow(0.9, totalSkippedReferenceCharacters);
 
         if (match) {
             chunks.push({
@@ -142,13 +145,9 @@ export default function scoreStringSimilarity(
     }
 
     totalSkippedInputCharacters += inputData.length - inputPosition;
-    totalSkippedReferenceCharacters += referenceData.length - referencePosition;
 
-    // Decrease score for skipped characters
-    score *= Math.pow(
-        0.99,
-        totalSkippedInputCharacters + totalSkippedReferenceCharacters
-    );
+    // decrease score for skipped input characters
+    score *= Math.pow(0.9, totalSkippedInputCharacters);
 
     // When we ran out of characters in the input string, we still need to add the last part of the reference to the matches
     if (referencePosition < referenceData.length) {
@@ -160,11 +159,6 @@ export default function scoreStringSimilarity(
 
     const combinedChunks = chunks.reduce(combineChunks, []);
 
-    // Start of the string has matched, boost score a bit
-    if (combinedChunks[0].matched) {
-        score += combinedChunks[0].text.length / inputData.length;
-    }
-
     // Add a penalty when multiple chunks have matched.
     // This means that the input string is spread a bit over the whole reference string
     const nonContiguousPenalty = Math.pow(
@@ -173,8 +167,6 @@ export default function scoreStringSimilarity(
     );
 
     score *= nonContiguousPenalty;
-
-    score /= referenceData.length + 1; // +1 to counterbalance score boost for start of string match
 
     d(
         'Final score comparing input %o to reference %o: %d',
