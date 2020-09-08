@@ -26,6 +26,14 @@ describe("scoreStringSimilarity", () => {
         ]);
     });
 
+    it("Gives an higher score for small prefix matches than for large non-prefix matches", () => {
+        const prefixMatch = scoreStringSimilarity("abc", "abcdefghi");
+        const otherMatch = scoreStringSimilarity("bcd", "abcdefghi");
+
+
+        expect(prefixMatch.score).toBeGreaterThan(otherMatch.score);
+    })
+
     it("Gives a score of 0 for a non-match", () => {
         const match = scoreStringSimilarity("xy", "abcdefghi");
         expect(match.score).toBeCloseTo(0);
@@ -63,6 +71,26 @@ describe("scoreStringSimilarity", () => {
         const contiguousMatch = scoreStringSimilarity("defg", "abcdefgh");
         const nonContiguousMatch = scoreStringSimilarity("degh", "abcdefgh");
         expect(contiguousMatch.score).toBeGreaterThan(nonContiguousMatch.score);
+    })
+
+    it("Penalizes a string that has tailing non-matching characters", () => {
+        const matchingChars = scoreStringSimilarity("cde", "abcdefgh");
+        const nonMatchingChars = scoreStringSimilarity("cdea", "abcdefgh");
+
+        expect(matchingChars.score).toBeGreaterThan(nonMatchingChars.score);
+    })
+    it("Penalizes a string that has starting non-matching characters", () => {
+        const matchingChars = scoreStringSimilarity("cde", "abcdefgh");
+        const nonMatchingChars = scoreStringSimilarity("xcde", "abcdefgh");
+
+        expect(matchingChars.score).toBeGreaterThan(nonMatchingChars.score);
+    })
+
+    it("Gives a similar score penalty for non-matching characters in the start as in the end", () => {
+        const startMismatch = scoreStringSimilarity("xcde", "abcdefgh");
+        const endMismatch = scoreStringSimilarity("cdex", "abcdefgh");
+
+        expect(startMismatch.score).toBeCloseTo(endMismatch.score);
     })
 
 })
