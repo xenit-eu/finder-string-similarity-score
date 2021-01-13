@@ -55,5 +55,11 @@
     "normalize-diacritics": "^2.11.1",
     "tiny-invariant": "^1.1.0",
     "tslib": "^2.0.1"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/temp/"
+    ]
   }
 }
