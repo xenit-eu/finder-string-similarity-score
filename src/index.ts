@@ -1,2 +1,2 @@
-export { SimilarityResult, SimilarityOpts } from './types';
+export { SimilarityResult, SimilarityOpts, MatchChunk } from './types';
 export { default } from './scoreStringSimilarity';

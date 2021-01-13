@@ -7,7 +7,7 @@
     "url": "https://xenit.eu/"
   },
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "typings": "dist/finder-string-similarity-score-public.d.ts",
   "module": "dist/finder-string-similarity-score.esm.js",
   "files": [
     "dist",

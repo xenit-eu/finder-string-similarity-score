@@ -4,24 +4,25 @@
 
 ```ts
 
-// @public (undocumented)
+// @public
+export interface MatchChunk {
+    readonly matched: boolean;
+    readonly text: string;
+}
+
+// @public
 function scoreStringSimilarity(inputData: string, referenceData: string, opts?: SimilarityOpts): SimilarityResult;
 
 export default scoreStringSimilarity;
 
-// @public (undocumented)
+// @public
 export interface SimilarityOpts {
-    // (undocumented)
     readonly keepAccents?: boolean;
 }
 
-// @public (undocumented)
+// @public
 export interface SimilarityResult {
-    // Warning: (ae-forgotten-export) The symbol "MatchChunk" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
     readonly chunks: readonly MatchChunk[];
-    // (undocumented)
     readonly score: number;
 }
 
