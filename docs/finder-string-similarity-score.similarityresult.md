@@ -2,20 +2,20 @@
 
 [Home](./index.md) &gt; [@xenit/finder-string-similarity-score](./finder-string-similarity-score.md) &gt; [SimilarityResult](./finder-string-similarity-score.similarityresult.md)
 
-## SimilarityResult interface
+## SimilarityResult namespace
 
-Result from a similarity comparison
 
 <b>Signature:</b>
 
 ```typescript
-export interface SimilarityResult 
+declare namespace SimilarityResult 
 ```
 
-## Properties
+## Functions
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [chunks](./finder-string-similarity-score.similarityresult.chunks.md) | readonly [MatchChunk](./finder-string-similarity-score.matchchunk.md)<!-- -->\[\] | Chunks of the reference string that are (not) matched by the input string |
-|  [score](./finder-string-similarity-score.similarityresult.score.md) | number | Normalized score between 0 and 1 that indicates the similarity between strings |
+|  Function | Description |
+|  --- | --- |
+|  [appendChunk(result, chunk)](./finder-string-similarity-score.similarityresult.appendchunk.md) | Appends a chunk to a similarity result<!-- -->This adds an additional matching or non-matching chunk at the end of the existing result without changing the calculated score |
+|  [prependChunk(result, chunk)](./finder-string-similarity-score.similarityresult.prependchunk.md) | Prepends a chunk to a similarity result<!-- -->This adds an additional matching or non-matching chunk in front of the existing result without changing the calculated score |
+|  [withScore(result, score)](./finder-string-similarity-score.similarityresult.withscore.md) | Updates the score of a similarity result |
 

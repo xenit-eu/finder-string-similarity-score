@@ -26,6 +26,13 @@ export interface SimilarityResult {
     readonly score: number;
 }
 
+// @public (undocumented)
+export namespace SimilarityResult {
+    export function appendChunk(result: SimilarityResult, chunk: MatchChunk): SimilarityResult;
+    export function prependChunk(result: SimilarityResult, chunk: MatchChunk): SimilarityResult;
+    export function withScore(result: SimilarityResult, score: number | ((currentScore: number) => number)): SimilarityResult;
+}
+
 
 // (No @packageDocumentation comment for this package)
 

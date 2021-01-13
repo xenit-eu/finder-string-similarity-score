@@ -23,7 +23,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint",
+    "lint": "tsdx lint src __tests__",
     "api-extractor": "tsc -p . --outDir temp/build --declaration && api-extractor run",
     "docs": "npm run api-extractor && api-documenter markdown --input temp --output-folder docs",
     "prepare": "npm run build && npm run api-extractor"

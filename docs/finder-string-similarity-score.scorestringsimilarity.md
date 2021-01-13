@@ -22,5 +22,5 @@ export default function scoreStringSimilarity(inputData: string, referenceData: 
 
 <b>Returns:</b>
 
-[SimilarityResult](./finder-string-similarity-score.similarityresult.md)
+SimilarityResult
 

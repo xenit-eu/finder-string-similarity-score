@@ -18,3 +18,9 @@
 |  [SimilarityOpts](./finder-string-similarity-score.similarityopts.md) | Options for comparing string similarity |
 |  [SimilarityResult](./finder-string-similarity-score.similarityresult.md) | Result from a similarity comparison |
 
+## Namespaces
+
+|  Namespace | Description |
+|  --- | --- |
+|  [SimilarityResult](./finder-string-similarity-score.similarityresult.md) |  |
+
