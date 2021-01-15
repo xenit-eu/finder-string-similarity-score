@@ -44,6 +44,14 @@ function scanForNextPosition(
     return bestPosition;
 }
 
+/**
+ * Calculates a similarity between the an input and a reference string
+ * @param inputData - Input data to compare against the reference
+ * @param referenceData - Reference string to compare the input against
+ * @param opts - Additional options for calculating a score
+ *
+ * @public
+ */
 export default function scoreStringSimilarity(
     inputData: string,
     referenceData: string,

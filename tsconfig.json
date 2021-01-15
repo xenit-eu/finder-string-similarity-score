@@ -1,7 +1,6 @@
 {
   "include": [
     "src",
-    "types",
     "__tests__"
   ],
   "compilerOptions": {
@@ -11,7 +10,7 @@
       "esnext"
     ],
     "importHelpers": true,
-    "declaration": true,
+    "declaration": false,
     "sourceMap": true,
     "strict": true,
     "noImplicitAny": true,
