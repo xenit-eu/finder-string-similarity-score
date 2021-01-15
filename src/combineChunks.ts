@@ -1,4 +1,4 @@
-import { MatchChunk } from './types';
+import { MatchChunk } from './SimilarityResult';
 
 /**
  * Adds a new chunk to the end of the list of chunks

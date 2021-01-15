@@ -1,4 +1,5 @@
-import { SimilarityOpts, SimilarityResult, MatchChunk } from './types';
+import { SimilarityOpts } from './types';
+import SimilarityResult, { MatchChunk } from './SimilarityResult';
 import calculateScore from './calculateScore';
 import combineChunks from './combineChunks';
 import debug from 'debug';
