@@ -48,10 +48,7 @@ namespace SimilarityResult {
     ): SimilarityResult {
         return {
             score: result.score,
-            chunks: [chunk, ...result.chunks].reduce(
-                (acc, current) => combineChunks(acc, current),
-                [] as MatchChunk[]
-            ),
+            chunks: [chunk, ...result.chunks].reduce(combineChunks, []),
         };
     }
 
