@@ -46,8 +46,8 @@ export default function scoreStringSimilarity(
     let score = 0;
     const chunks: MatchChunk[] = [];
 
-    const normalizedInputData = removeAccents(inputData);
-    const normalizedReferenceData = removeAccents(referenceData);
+    const normalizedInputData = removeAccents(inputData).toLowerCase();
+    const normalizedReferenceData = removeAccents(referenceData).toLowerCase();
 
     const startIndex = normalizedReferenceData.indexOf(normalizedInputData);
 
