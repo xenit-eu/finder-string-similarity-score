@@ -2,15 +2,13 @@ import scoreStringSimilarity from '../src/scoreStringSimilarity';
 
 describe('scoreStringSimilarity', () => {
     it('Creates chunks for matching letters', () => {
-        const match = scoreStringSimilarity('dfg', 'abcdefghi');
+        const match = scoreStringSimilarity('defg', 'abcdefghi');
 
         expect(match.score).toBeLessThan(1);
 
         expect(match.chunks).toEqual([
             { text: 'abc', matched: false },
-            { text: 'd', matched: true },
-            { text: 'e', matched: false },
-            { text: 'fg', matched: true },
+            { text: 'defg', matched: true },
             { text: 'hi', matched: false },
         ]);
     });

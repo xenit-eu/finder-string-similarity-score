@@ -11,7 +11,10 @@ import { MatchChunk } from './SimilarityResult';
 export default function combineChunks(
     chunks: readonly MatchChunk[],
     newChunk: MatchChunk
-): MatchChunk[] {
+): readonly MatchChunk[] {
+    if (newChunk.text.length === 0) {
+        return chunks;
+    }
     if (chunks.length === 0) {
         return [newChunk];
     }
